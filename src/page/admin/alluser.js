@@ -80,12 +80,11 @@ const Alluser = () => {
                               ""
                             )}
                     
-              <h4>รายชื่อ แอดมิน</h4>
+              <h4>รายชื่อแอดมิน</h4>
                 <Table bordered hover responsive>
                   <thead>
                     <tr>
-                      <th>ID</th>
-                      <th>ชื่อ เต็ม </th>
+                      <th>ชื่อ-สกุล </th>
                       <th>ชื่อผู้ใช้ </th>
                       <th>สถานะ</th>
                       
@@ -104,15 +103,16 @@ const Alluser = () => {
                       return (
                         <>
                           <tr>
-                            <th>{list.id}</th>
-                            <td>{list.fullname}</td>
+                            <td key={list.id}>{list.fullname}</td>
                             <td>{list.username}</td>
                             <td>{list.status}</td>
-                            <td> {ses.status == "admin" ? (
+                           {ses.status == "admin" ? (
+                              <td>
                               <Info_user id={list.id} />
+                              </td>
                             ) : (
-                              ""
-                            )}</td>
+                              <></>
+                            )}
                            
                           </tr>
                         </>
@@ -124,8 +124,7 @@ const Alluser = () => {
                 <Table bordered hover responsive>
                   <thead>
                     <tr>
-                      <th>ID</th>
-                      <th>ชื่อ เต็ม </th>
+                      <th>ชื่อ-สกุล </th>
                       <th>ชื่อผู้ใช้ </th>
                       <th>สถานะ</th>
                       
@@ -144,15 +143,17 @@ const Alluser = () => {
                       return (
                         <>
                           <tr>
-                            <th>{normal.id}</th>
                             <td>{normal.fullname}</td>
                             <td>{normal.username}</td>
-                            <td>{normal.status}</td>
-                            <td> {ses.status == "admin" ? (
+                            <td>{normal.status}</td>  {ses.status == "admin" ? (
+                              <td>
                               <Info_user id={normal.id} />
+                              </td>
                             ) : (
-                              ""
-                            )}</td>
+                              <></>
+                            )}
+
+                         
                            
                           </tr>
                         </>

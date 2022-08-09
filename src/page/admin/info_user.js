@@ -65,7 +65,7 @@ const Info_user = ({ id }) => {
           .then((res) => {
             if (res.data.message == "success") {
               ////ต่อตรงนี้
-              Swal.fire("Deleted!", "ลบบัญชีผู้สำเร็จ.", "success")
+              Swal.fire("Deleted!", "ลบบัญชีผู้ใช้สำเร็จ.", "success")
                 .then(() => setModal(!modal))
                 .then(() => window.location.reload());
             } else {
@@ -198,7 +198,7 @@ const Info_user = ({ id }) => {
                               </Button>
                             </Col>
                             <Col md="6">
-                                <Resetpass id={id}/>
+                                {/* <Resetpass id={id}/> */}
                               {/* <Button
                                 className="Button-Style"
                                 color="warning"

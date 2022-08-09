@@ -39,9 +39,9 @@ const NavBar = () => {
     return (
       <div>
         <Navbar
-          className="navbar navbar-expand-lg navbar-dark sticky-top shadow-box-example "
+          className="navbar navbar-expand-lg navbar-light sticky-top shadow-box-example"
           color="white"
-         
+          light
           expand="md"
           style={{ maxWidth: "auto" }}
         >

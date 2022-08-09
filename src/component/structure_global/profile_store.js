@@ -161,7 +161,48 @@ const ProfileStore = ({ id }) => {
                             <b>{userinfo.status}</b>
                           </div>
                         </Row>
+                        <Row>
+                          <div className="col-6" align="right">
+                            เบอร์โทรศัพท์ :
+                          </div>
+                          <div className="col-6" align="left">
+                            <b>{userinfo.tel}</b>
+                          </div>
+                        </Row>
+                        <Row>
+                          <div className="col-6" align="right">
+                            VendGroup :
+                          </div>
+                          <div className="col-6" align="left">
+                            <b>{userinfo.VendGroup}</b>
+                          </div>
+                        </Row>
+                        <Row>
+                          <div className="col-6" align="right">
+                            TaxGroup:
+                          </div>
+                          <div className="col-6" align="left">
+                            <b>{userinfo.taxGroup}</b>
+                          </div>
+                        </Row>
+                        <Row>
+                          <div className="col-6" align="right">
+                            WHT Registration ID:
+                          </div>
+                          <div className="col-6" align="left">
+                            <b>{userinfo.BPC_WHTid}</b>
+                          </div>
+                        </Row>
+                        <Row>
+                          <div className="col-6" align="right">
+                            BranchNo :
+                          </div>
+                          <div className="col-6" align="left">
+                            <b>{userinfo.BPC_BranchNo}</b>
+                          </div>
+                        </Row>
                         <div className="borderline" />
+
                         <Form>
                           <div align="center">
                             <Row>

@@ -42,51 +42,53 @@ const Registerusers = (props) => {
     var data = {
       fullname: Users.fullname,
       username: Users.username,
-      tel: Users.tel,
+      tel: " ",
       status: Users.status,
-      password: Users.pass,
+      password: " ",
     };
-    var minc = data.password.length;
-    if(data.fullname!= ""||data.username!= ""||data.tel!=""||data.password!=""||data.status!=" " ){
-        if(minc==8){
-    
-                    axios.post(API("Registerusers"), data) //ส่งค่าไปแอดใน DB
-                  .then((res) => {
-                    console.log(res.data.message);
-                    if (res.data.message == "success") {
-    
-                      Swal.fire(
-                        "แอด user สำเร็จ",
-                        "success"
-                      )
-                      .then(() => window.location.reload());
-                    } else{
-                      Swal.fire(
-                        "เแอด user ล้มเหลว",
-                        "ขื่อผู้ใช้นี้มีอยู่ในระบบอยู้แล้ว",
-                        "warning"
-                      );
-                      // .then(() => window.location.reload())
-                    }
-                  })
-    
-                  .catch((error) => {
-                    console.log("error");
-                  }); //ใช้ ดัก Error
-             
-        }else{
-            Swal.fire(
-                "เปลี่ยนรหัสผ่านล้มเหลว",
-                "กรุณาตั้งรหัสผ่าน 8 หลัก",
-                "warning"
-              );
-        }
-    }else{
-        Swal.fire(
+    // var minc = data.password.length;
+    if(data.fullname == ""||data.username == "" ||data.status =="" ){
+        // if(minc==8){
+          Swal.fire(
             "เพิ่มผู้ใช้ใหม่ล้มเหลว",
             "กรุณากรอกข้อมูลให้ครบ",
             "warning"
           );
+                   
+             
+        // }else{
+        //     Swal.fire(
+        //         "เปลี่ยนรหัสผ่านล้มเหลว",
+        //         "กรุณาตั้งรหัสผ่าน 8 หลัก",
+        //         "warning"
+        //       );
+        // }
+    }else{
+       
+
+          axios.post(API("Registerusers"), data) //ส่งค่าไปแอดใน DB
+          .then((res) => {
+            console.log(res.data.message);
+            if (res.data.message == "success") {
+
+              Swal.fire(
+                "แอด user สำเร็จ",
+                "success"
+              )
+              .then(() => window.location.reload());
+            } else{
+              Swal.fire(
+                "เแอด user ล้มเหลว",
+                "ขื่อผู้ใช้นี้มีอยู่ในระบบอยู้แล้ว",
+                "warning"
+              );
+              // .then(() => window.location.reload())
+            }
+          })
+
+          .catch((error) => {
+            console.log("error");
+          }); //ใช้ ดัก Error
     }
     
   };
@@ -100,6 +102,7 @@ const Registerusers = (props) => {
         size="md"
         style={{ marginBottom: 10 }}
         onClick={toggle}
+        
       >
         เพิ่มผู้ใช้งานในระบบ
       </Button>
@@ -114,14 +117,14 @@ const Registerusers = (props) => {
                 <Input type="text" name="fullname" onChange={inputdata} />
                 ชื่อผู้ใช้
                 <Input type="text" name="username" onChange={inputdata} />
-                รหัสผ่าน
+                {/* รหัสผ่าน
                 <Input
                   type="password"
                   name="pass"
                   min="8"
                   max="8"
                   onChange={inputdata}
-                />
+                /> */}
                 status
                 <Input
                   type="select"
@@ -133,8 +136,8 @@ const Registerusers = (props) => {
                   <option value="admin">admin</option>
                   <option value="normal">normal</option>
                 </Input>
-                Tel
-                <Input type="text" name="tel" onChange={inputdata} />
+                {/* Tel
+                <Input type="text" name="tel" onChange={inputdata} /> */}
               </Card>
             </FormGroup>
             <div align="right">

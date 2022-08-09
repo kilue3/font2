@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from "react";
 import {
   Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
+  Modal, ModalHeader, ModalBody, ModalFooter ,
   FormGroup,
   Col,
   Form,
   Card,
-  CardBody,Input,
+  Input,
   Row,
 } from "reactstrap";
 import axios from "axios";
@@ -17,12 +14,44 @@ import Swal from "sweetalert2";
 import API from "../../API/API";
 
 const Op_bill = ({ props }) => {
-  const { className } = props;
 
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
-  const userdata = {};
+  
+  const [Invoice, setInvoice] = useState("");
+ ///////////////////localstate///////////
+ const session = {
+  id: localStorage.getItem("id"),
+  fname: localStorage.getItem("fname"),
+  uname: localStorage.getItem("uname"),
+  conname:localStorage.getItem("conname"),
+  status: localStorage.getItem("status"),
+};
+const [ses, setSes] = useState(session);
+  useEffect(() => {
+    axios.get(API("Getstoreinvoice") + ses.uname).then((response) => {
+      setInvoice(response.data);
+    });
+  }, []);
+//////////////////////////////ดึงข้อมูลบิล///////////////////////////////////
+  const [Invoicedt, setInvoicedt] = useState([]);
+  const CheckIds = (e) => {
+    e.preventDefault();
+
+    var id = bill.bill_id;
+    if (id != "") {
+      axios
+        .get(API("GetInvoicedt") + id) //ส่งค่าไปแอดใน DB
+        .then((res) => {
+          setInvoicedt(res.data);
+         
+        });
+    } else {
+      Swal.fire("เแอด user ล้มเหลว", "ไม่พบรายชื่อระบบ", "warning");
+    }
+  };
+
 ///////////date///////////////////////
 const date = new Date();  // 2009-11-10
 const month = date.toLocaleString('th-TH', {
@@ -35,35 +64,31 @@ console.log(month);
     let { name, value } = event.target;
     setbill({ ...bill, [name]: value });
   };
-  ///////////////////localstate///////////
-  const session = {
-    id: localStorage.getItem("id"),
-    fname: localStorage.getItem("fname"),
-    username: localStorage.getItem("username"),
-    conname:localStorage.getItem("conname"),
-    status: localStorage.getItem("status"),
-  };
-  const [ses, setSes] = useState(session);
-
+ 
   const logs = {
     bill_id: "",
-    number: "",
-    note: "",
-    store_id: ses.id,
+    
   };
  
   const [bill, setbill] = useState(logs);
   /////////////delectuser////////////////
-  const opbill = (e) => {
+  const opbill = (e,Invoicedts) => {
     e.preventDefault();
 
     var data = {
-      bill_id: bill.bill_id,
-      bill_detail: bill.note,
-      store_id: bill.store_id,
-      number: bill.number,
+      bill_id: Invoicedts.Invoice,
+      bill_detail: "",
+      store_id: ses.id,
+      number: Invoicedts.BillAmount,
+      AmountCur: Invoicedts.AmountCur,
+      SumTax: Invoicedts.SumTax,
+      Bpc_Mark: Invoicedts.Bpc_Mark,
+      Bpc_BillFinish: Invoicedts.Bpc_BillFinish,
+      duedate:  Invoicedts.duedate
+
+
     };
-    if(data.bill_id!= ""||data.bill_detail!= ""||data.store_id!=""||data.number!="" ){
+   
       
     
                     axios.post(API("Addbills"), data) //ส่งค่าไปแอดใน DB
@@ -73,7 +98,8 @@ console.log(month);
     
                       Swal.fire(
                         "เปิดบิลสำเร็จ",
-                        "success"
+                        "กรุณาไประบุรายละเอียดบิล",
+                       "success"
                       )
                       .then(() => window.location.reload());
                     } else{
@@ -91,13 +117,7 @@ console.log(month);
                   }); //ใช้ ดัก Error
              
       
-    }else{
-        Swal.fire(
-            "เพิ่มผู้ใช้ใหม่ล้มเหลว",
-            "กรุณากรอกข้อมูลให้ครบ",
-            "warning"
-          );
-    }
+    
 }
 
   return (
@@ -117,40 +137,88 @@ console.log(month);
         </Col>
       </Row>
 
-      <Form align="right">
-        <Modal isOpen={modal} toggle={toggle} className={className}>
+        <Modal isOpen={modal} toggle={toggle}  fullscreen={true} >
           <ModalHeader toggle={toggle}>ยื่นเรื่องวางบิล </ModalHeader>
           <ModalBody>
             <FormGroup align="left">
-              <h3 for="more_detail">ยืนวางบิลประจำเดือน {month}</h3>
+              <h3 for="more_detail">ยื่นวางบิลประจำเดือน {month}</h3>
 
               <Form align="right">
           <ModalBody>
             <FormGroup align="left">
               <Card className="CardBackground-1">
-                ชื่อ-สกุล :
-               คุณ {ses.conname} {"(" + ses.fname + ")"}<br></br>
-                เลขเลขสาร (เฉพาะใบเบิก)
-                <Input type="text" name="bill_id" placeholder="กรุณากรอกเลขใบเบิก" onChange={inputdata} />
-                ยอดรวมเงิน
-                <Input
-                  type="number"
-                  name="number"
-                  placeholder="กรุณากรอกยอดที่ต้องการเรียกเก็บเงิน"
-                  onChange={inputdata}
-                />
-                บันทึกข้อความ(โน็ต)
-                <Input
-                  type="textarea"
-                  name="note"
-                  id="title"
-                  onChange={inputdata}
-                  required
-                >
-                  <option value="admin">admin</option>
-                  <option value="normal">normal</option>
+             {ses.fname}<br></br>
+                เลขเอกสาร (เฉพาะใบเบิก)
+                <Input type="select" name="bill_id" placeholder="กรุณากรอกเลขใบเบิก" onChange={inputdata} >
+                <option>กรุณาเลือกหมายเลขบิล</option>
+               {Invoice == ""?
+               
+               (<>
+        <option>ไม่พบหมายเลขบิลในระบบ</option>
+</>):
+               
+               
+               (<>
+               {Invoice.map((lists) => {
+                return (
+                  <>
+                    
+                      <option key={lists.Invoice}>{lists.Invoice}</option>
+
+                      
+                  </>
+                );
+              })}</>)}
+                
                 </Input>
                 
+                <br></br>
+                <Button
+                      color="primary"
+                      className="Button-Style"
+                      block
+                      size="md"
+                      onClick={(e) => CheckIds(e)}
+                    >
+                      ดึงข้อมูล
+                    </Button>{" "}
+
+                    {Invoicedt == ""  ? (
+              <>
+                
+              </>
+            ) : (
+              <>
+              {Invoicedt.map((Invoicedts) => {
+                  return (
+                    <>
+                     
+                      <hr></hr>
+                      <h4> เลขที่เอกสาร :{Invoicedts.Invoice}</h4>
+                      <hr></hr>
+                      <b>วันครบกำหนด :</b>{Invoicedts.duedate} 
+                      <br></br>
+                     <b> ภาษี :</b> {Invoicedts.SumTax} บาท <br></br>
+                     <b> ยอดวางบิล :</b> {Invoicedts.BillAmount} บาท
+                      <br></br>
+                   
+                      
+
+                      <hr></hr>
+                      <Button
+                        color="success"
+                        className="Button-Style col-12"
+                        size="md"
+                        onClick={(e, a) =>opbill(e,Invoicedts)}>
+                        ตกลง
+                      </Button>
+                    </>
+                  );
+                })}</>
+            )}
+
+
+                    
               </Card>
             </FormGroup>
             <div align="right">
@@ -158,14 +226,14 @@ console.log(month);
             </div>
           </ModalBody>
           <ModalFooter>
-            <Button
+            {/* <Button
               color="primary"
               className="Button-Style"
               size="md"
               onClick={(e) =>opbill(e)}
             >
               ตกลง
-            </Button>
+            </Button> */}
             <Button
               color="danger"
               className="Button-Style"
@@ -183,7 +251,6 @@ console.log(month);
           </ModalBody>
          
         </Modal>
-      </Form>
     </div>
   );
 };

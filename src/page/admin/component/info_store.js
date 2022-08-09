@@ -60,7 +60,7 @@ const Info_store = ({ id }) => {
           .then((res) => {
             if (res.data.message == "success") {
               ////ต่อตรงนี้
-              Swal.fire("Deleted!", "ลบบัญชีผู้สำเร็จ.", "success")
+              Swal.fire("Deleted!", "ลบผู้ใช้สำเร็จ.", "success")
                 .then(() => setModal(!modal))
                 .then(() => window.location.reload());
             } else {

@@ -11,6 +11,7 @@ import user from ".././../img/user.png"
 import bill from ".././../img/invoice.png"
 import store from ".././../img/store.png"
 import Historybill from ".././../img/history.png"
+import Close from ".././../img/close.png"
 
 const StaffLeftMenu = () => {
   const session = {
@@ -35,7 +36,7 @@ const StaffLeftMenu = () => {
            className="buttonMenuIcon"
            src={Home}
          />
-         กำหนดขอบเขตการวางบิล
+         หน้าแรก
        </div>
      </a>
    </CardBody>
@@ -84,7 +85,7 @@ const StaffLeftMenu = () => {
        <div className="buttonMenu">
          <img
            className="buttonMenuIcon"
-           src={Historybill}
+           src={Close}
          />
          รายการบิลที่ไม่ผ่านการอนุมัติ
        </div>

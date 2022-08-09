@@ -17,6 +17,7 @@ import Swal from "sweetalert2";
 import API from '../API/API'
 import bill from ".././../img/invoice.png"
 import logo from ".././../img/logos.png"
+import mascot from ".././../img/mascot.png"
 
 const title = "เข้าสู่ระบบ";
 
@@ -152,6 +153,8 @@ const Store_Login = () => {
             </CardBody>
           </Card>
         </div>
+        <img src={mascot} align="left" style={{ marginTop: "0"}} />
+        <img src={mascot} align="right" style={{ marginTop: "0" }}/>
       </Container>
     </>
   );

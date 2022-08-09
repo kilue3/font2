@@ -92,7 +92,7 @@ var minc = data.password.length;
 
   return (
     <div style={{ marginTop: "0px", marginLeft: "10px" }}>
-      <Button className="Button-Style" color="warning" onClick={toggle}>
+      <Button className="Button-Style" color="warning" onClick={toggle} disabled>
         เปลี่ยนรหัสผ่าน
       </Button>
   

@@ -19,7 +19,6 @@ const Userlist = ({id}) => {
       <>
         <>
           <tr key={list.Store_id}>
-            <th>{list.Store_id}</th>
             <td>{list.Store_name}</td>
             <td>{list.Store_username}</td>
             <td>

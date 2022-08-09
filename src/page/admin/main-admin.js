@@ -4,8 +4,8 @@ import { Container, Card, Button, Input, Row, Col, CardBody } from "reactstrap";
 import { Helmet } from "react-helmet";
 import NavBar from "../../component/structure_global/navbar";
 import axios from "axios";
-import Swal from "sweetalert2";
 import API from "../API/API";
+import logo from "../../../src/img/th.png"
 
 const title = "หน้าหลักระบบผู้ดูแล";
 
@@ -18,14 +18,14 @@ const Adminpage = () => {
   };
   const [ses, setSes] = useState(session);
   ////////////////////////state date/////////////////////
-  const log = {
-    date: "",
-  };
-  const [billdate, setbilldate] = useState(log);
-  const inputdata = (event) => {
-    let { name, value } = event.target;
-    setbilldate({ ...billdate, [name]: value });
-  };
+  // const log = {
+  //   date: "",
+  // };
+  // const [billdate, setbilldate] = useState(log);
+  // const inputdata = (event) => {
+  //   let { name, value } = event.target;
+  //   setbilldate({ ...billdate, [name]: value });
+  // };
 
   //////////////check status/////////////////
   if (ses.status == "enable" || ses.status == null ) {
@@ -33,40 +33,40 @@ const Adminpage = () => {
   }
 
   ///////////กำหนดวันหมดเขตบิล/////////
-  const Opbill = (e) => {
-    e.preventDefault();
-    const date = new Date();
+  // const Opbill = (e) => {
+  //   e.preventDefault();
+  //   const date = new Date();
 
-    const year = date.getFullYear();
-    const month = date.getMonth();
-    const op_date = [year, month + 1, "1"].join("/");
+  //   const year = date.getFullYear();
+  //   const month = date.getMonth();
+  //   const op_date = [year, month + 1, "1"].join("/");
 
-    const withSlashes = [year, month + 1, billdate.date].join("/");
-    console.log(withSlashes);
-    var data = {
-      opdate: op_date,
-      enddate: withSlashes,
-    };
-    console.log(data);
-    if (billdate.date == "") {
-      Swal.fire(
-        "กำหนดวันแจ้งเปิดบิลล้มเหลว",
-        "กรุณาระบุวันหมดเขตการส่งบิล",
-        "warning"
-      );
-    } else {
-      axios
-        .put(API("Billend"), data) //ส่งค่าไปแอดใน DB
-        .then((res) => {
-          console.log(res.data.message);
-          if (res.data.message == "success") {
-            Swal.fire("แจ้งกำหนดการเปิดบิลสำเร็จ", "success").then(() =>
-              window.location.reload()
-            );
-          }
-        });
-    }
-  };
+  //   const withSlashes = [year, month + 1, billdate.date].join("/");
+  //   console.log(withSlashes);
+  //   var data = {
+  //     opdate: op_date,
+  //     enddate: withSlashes,
+  //   };
+  //   console.log(data);
+  //   if (billdate.date == "") {
+  //     Swal.fire(
+  //       "กำหนดวันแจ้งเปิดบิลล้มเหลว",
+  //       "กรุณาระบุวันหมดเขตการส่งบิล",
+  //       "warning"
+  //     );
+  //   } else {
+  //     axios
+  //       .put(API("Billend"), data) //ส่งค่าไปแอดใน DB
+  //       .then((res) => {
+  //         console.log(res.data.message);
+  //         if (res.data.message == "success") {
+  //           Swal.fire("แจ้งกำหนดการเปิดบิลสำเร็จ", "success").then(() =>
+  //             window.location.reload()
+  //           );
+  //         }
+  //       });
+  //   }
+  // };
   /////////////////checkdate///////////////////////////
   var today = new Date();
   const D = today.toISOString().substring(0, 10);
@@ -121,19 +121,34 @@ const Adminpage = () => {
               </nav>
               <Card className="CardHeaderStyle">
                 <h5 style={{ margin: "0px" }}>
-                  <img
-                    className="header-1-Icon"
-                    src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png"
-                  />
+                  
                   หน้าหลักระบบผู้ดูแล
                 </h5>
               </Card>
             </Card>
 
             <Card className="CardBackground-1" style={{ margin: 10 }}>
-              <CardBody className="CardBody-WithBoxContent">
+            <Card className="CardBackground-1" style={{ margin: 10 }}>
+                 <CardBody className="CardBody-WithBoxContent">
+                    <h1 class="animate-charcter" align="center"><b>ระบบวางบิลออนไลน์</b></h1>
+                    <div class="quantity" align="center">
+                      <br></br>
+                      <img src={logo} ></img>
+                 </div>
+                
+               </CardBody>
+             </Card> 
+              {/* <CardBody className="CardBody-WithBoxContent">
+              <h5 style={{ margin: "0px" }}>
+                      <img
+                        className="header-1-Icon"
+                        src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png"
+                      />
+                      ระบบวางบิลออนไลน์
+                    </h5>
                 สร้างเอกสารวางบิลภายในวันที่{" "}
-                <div class="quantity">
+                 */}
+                {/* <div class="quantity">
                   <Input
                     type="select"
                     name="date"
@@ -157,6 +172,20 @@ const Adminpage = () => {
                     <option>13</option>
                     <option>14</option>
                     <option>15</option>
+                    <option>16</option>
+                    <option>17</option>
+                    <option>18</option>
+                    <option>19</option>
+                    <option>20</option>
+                    <option>21</option>
+                    <option>22</option>
+                    <option>23</option>
+                    <option>24</option>
+                    <option>25</option>
+                    <option>26</option>
+                    <option>27</option>
+                    <option>28</option>
+                    <option>29</option>
                   </Input>
                 </div>
                 <div className="borderline" />
@@ -170,8 +199,8 @@ const Adminpage = () => {
                   >
                     บันทึก
                   </Button>
-                </div>
-              </CardBody>
+                </div> */}
+              {/* </CardBody> */}
             </Card>
           </Col>
         </Row>

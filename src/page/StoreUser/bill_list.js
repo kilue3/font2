@@ -78,7 +78,6 @@ const Billlist = () => {
                     <tr>
                       <th>วันเวลา</th>
                       <th>หมายเลขบิล </th>
-                      <th>โน็ต</th>
                       <th>สถานะ</th>
                       <th>ดูรายละเอียด</th>
                     </tr>
@@ -91,7 +90,6 @@ const Billlist = () => {
                             <td>{lists.bill_op_time}</td>
 
                             <th>{lists.bill_id}</th>
-                            <td>{lists.bill_detail}</td>
                             {lists.bill_status == "wait" ? (
                               <>
                                 <td className="status">

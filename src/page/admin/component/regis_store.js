@@ -9,12 +9,8 @@ import {
   Input,
   Form,
   Card,
-  Row,
-  UncontrolledDropdown,
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
+    Dropdown,
+
 } from "reactstrap";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -33,16 +29,16 @@ const Registerstore = (props) => {
 
   ////////////////////search///////////////////////////
   const handleChange = (event) => {
-    setSearchStores(event.target.value); //รับค่าจาก value ที่กรอกข้อมูลมาและเตรียมเปลี่ยนค่ามาเป็นข้อมูลที่ต้องการ
+    setSearchStores(event.target.value); 
   };
 
   useEffect(() => {
     axios
-      .get(API("SearchStore") + SearchStores) //โดย axios นั่นดึงค่า url
+      .get(API("SearchStore") + SearchStores) 
       .then((response) => {
-        //ใช้ตัวแปรค่า คือ responseเพื่อเก็บค่า
+        
 
-        setStores(response.data); // เก็บค่า response หลังจาก ดึงค่าข้อมูลผลลัพธ์
+        setStores(response.data); 
       });
   }, [SearchStores]);
   // useEffect(() => {
@@ -74,8 +70,8 @@ const Registerstore = (props) => {
               "เแอด user ล้มเหลว",
               "ขื่อผู้ใช้นี้มีอยู่ในระบบอยู้แล้ว",
               "warning"
-            );
-            // .then(() => window.location.reload())
+            )
+            .then(() => window.location.reload());
           }
         });
     } else {
@@ -152,6 +148,17 @@ const Registerstore = (props) => {
       >
         เพิ่มบัญชีร้านค้าในระบบ
       </Button>
+{" "}
+      <Button
+        outline
+        color="danger"
+        size="md"
+        style={{ marginBottom: 10 }}
+        target="_blank"
+      href={API("Import")}
+      >
+        เพิ่มบัญชีร้านค้าในระบบด้วยไฟล์ excel
+      </Button>
 
       <Form align="right">
         <Modal isOpen={modal} toggle={toggle} className={className}>
@@ -209,6 +216,12 @@ const Registerstore = (props) => {
             </FormGroup>
             {Message.message == "success" ? (
               <>
+               {Storeinfo == ""?
+               (<>
+                <h4 align="center">ไม่พบข้อมูล</h4>
+               
+               </>):
+               (<>
                 {Storeinfo.map((Storeinfos) => {
                   return (
                     <>
@@ -263,7 +276,15 @@ const Registerstore = (props) => {
                       </Button>
                     </>
                   );
-                })}
+                })}</>)
+
+
+               }
+
+
+
+          
+               
               </>
             ) : (
               <></>

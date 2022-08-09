@@ -8,7 +8,7 @@ import {
   CardHeader,
   FormGroup,
   Table,
-  Badge ,
+  Badge,
   Input,
   Form,
   Button,
@@ -28,7 +28,7 @@ const Detail_bill_admin = ({ id }) => {
   };
   const [ses, setSes] = useState(session);
   const title = "บิลหมายเลข" + id;
-  if (ses.status == "enable" || ses.status == null ) {
+  if (ses.status == "enable" || ses.status == null) {
     window.location.assign("/");
   }
   // const [status, SetStatus] = useState(session);
@@ -53,13 +53,9 @@ const Detail_bill_admin = ({ id }) => {
     page();
   }, [id]);
 
-
- 
- 
   var today = new Date();
   const D = today.toISOString().substring(0, 10);
 
- 
   ////////////////////////////approve//////////////////////////
   const initapprovenote = {
     note: "",
@@ -125,8 +121,6 @@ const Detail_bill_admin = ({ id }) => {
         console.log("error");
       }); //ใช้ ดัก Error
   };
-  
-
 
   return (
     <>
@@ -145,7 +139,7 @@ const Detail_bill_admin = ({ id }) => {
               <nav aria-label="breadcrumb">
                 <ol className="breadcrumb BreadcrumbStyle">
                   <li className="breadcrumb-item">
-                    <a href="/mainstore">หน้าหลัก</a>
+                    <a href="/adminpage">หน้าหลัก</a>
                   </li>
                   <li className="breadcrumb-item active" aria-current="page">
                     {title}
@@ -157,11 +151,11 @@ const Detail_bill_admin = ({ id }) => {
                   <b>รายละเอียด {title}</b>{" "}
                   {Bill.billstatus == "wait" ? (
                     <>
-                    <Badge color="danger">สร้างใหม่</Badge>
+                      <Badge color="danger">สร้างใหม่</Badge>
                     </>
                   ) : (
                     <>
-                    <Badge color="info">{Bill.billstatus}</Badge>
+                      <Badge color="info">{Bill.billstatus}</Badge>
                     </>
                   )}
                 </h5>
@@ -177,11 +171,12 @@ const Detail_bill_admin = ({ id }) => {
               }}
             >
               <CardBody className="CardBody-WithBoxContent">
-                
                 {bFile.message == "fail" ? (
                   <>
                     <div className="NotFoundTxtInBox">
-                    <div align="center"><b>ไม่พบไฟล์เอกสารในบิลนี้</b></div> 
+                      <div align="center">
+                        <b>ไม่พบไฟล์เอกสารในบิลนี้</b>
+                      </div>
                     </div>{" "}
                   </>
                 ) : (
@@ -204,19 +199,17 @@ const Detail_bill_admin = ({ id }) => {
                                   outline
                                   href={API("Uploadfolder") + files.file_name}
                                   target="_blank"
-
                                 >
                                   {files.file_name}
                                 </Button>
                               </td>
                               <th>{files.file_date}</th>
                               <td>
-                              <Button
+                                <Button
                                   color="success"
                                   block
                                   href={API("Uploadfolder") + files.file_name}
                                   target="_blank"
-
                                 >
                                   ดู
                                 </Button>
@@ -236,7 +229,7 @@ const Detail_bill_admin = ({ id }) => {
                         className="CardBackground-2"
                         style={{ minHeight: "200px" }}
                       >
-                        <a >
+                        <a>
                           <CardHeader
                             className=""
                             style={{
@@ -263,9 +256,23 @@ const Detail_bill_admin = ({ id }) => {
                           <div>
                             <Row>
                               <Col md="8">
-                                <b>ยอดวางบิล : {Bill.amount} บาท</b>
+                                <h5>
+                                  <b>ภาษี : {Bill.SumTax} บาท</b>
+                                  <br></br>
+                                  <b>ยอดวางบิล : {Bill.amount} บาท</b>
+                                  <br></br>
+                                  <b>วันครบกำหนด : {Bill.bill_duedate}</b>
+                                </h5>
                               </Col>
                               <Col md="4">
+                                {/* {Bill.billstatus == "wait" ||
+                                Bill.billstatus == "ไม่ผ่านการอนุมัติ" ? (
+                                  <>
+                                    <Edit_amount id={id} />
+                                  </>
+                                ) : (
+                                  <></>
+                                )} */}
                               </Col>
                             </Row>
                           </div>
@@ -308,9 +315,12 @@ const Detail_bill_admin = ({ id }) => {
                         >
                           <div style={{ marginBottom: "5px" }}>
                             <b>{comments.cm_username} </b>
-                            <span style={{ color: "gray" }}> {comments.cm_time}</span>
+                            <span style={{ color: "gray" }}>
+                              {" "}
+                              {comments.cm_time}
+                            </span>
                           </div>
-                          <div  style={{}}>
+                          <div style={{}}>
                             <b>{comments.cm_status}</b>
                           </div>
                           <div className="text-muted" style={{}}>
@@ -396,8 +406,6 @@ const Detail_bill_admin = ({ id }) => {
                       </Button>
                     </>
                   )}
-
-                
                 </Form>
               </CardBody>
             </Card>

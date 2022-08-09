@@ -29,7 +29,7 @@ const Bill_detail_page = ({ id }) => {
     status: localStorage.getItem("status"),
   };
   const [ses, setSes] = useState(session);
-  if (ses.status == "admin" || ses.status == null|| ses.status == "normal"  ) {
+  if (ses.status == "admin" || ses.status == null || ses.status == "normal") {
     window.location.assign("/");
   }
   const title = "บิลหมายเลข" + id;
@@ -64,8 +64,7 @@ const Bill_detail_page = ({ id }) => {
   const handleFile = (e) => {
     let file = e.target.files[0];
     setfileup(file);
-    // console.log(e.target.files,"$$$$");
-    // console.log(e.target.files[0],"$$$$");
+   
   };
 
   const savefile = (e) => {
@@ -186,7 +185,6 @@ const Bill_detail_page = ({ id }) => {
       }); //ใช้ ดัก Error
   };
 
-
   return (
     <>
       <Helmet>
@@ -215,13 +213,13 @@ const Bill_detail_page = ({ id }) => {
                 <h5 style={{ margin: "0px" }}>
                   <b>รายละเอียด {title}</b>{" "}
                   {Bill.billstatus == "wait" ? (
-                     <>
-                     <Badge color="danger">สร้างใหม่</Badge>
-                     </>
-                   ) : (
-                     <>
-                     <Badge color="info">{Bill.billstatus}</Badge>
-                     </>
+                    <>
+                      <Badge color="danger">สร้างใหม่</Badge>
+                    </>
+                  ) : (
+                    <>
+                      <Badge color="info">{Bill.billstatus}</Badge>
+                    </>
                   )}
                 </h5>
               </Card>
@@ -272,7 +270,9 @@ const Bill_detail_page = ({ id }) => {
                 {bFile.message == "fail" ? (
                   <>
                     <div className="NotFoundTxtInBox">
-                    <div align="center"><b>ไม่พบไฟล์เอกสารในบิลนี้</b></div> 
+                      <div align="center">
+                        <b>ไม่พบไฟล์เอกสารในบิลนี้</b>
+                      </div>
                     </div>{" "}
                   </>
                 ) : (
@@ -297,7 +297,6 @@ const Bill_detail_page = ({ id }) => {
                                   target="_blank"
                                 >
                                   {files.file_name}
-                                  
                                 </Button>
                               </td>
                               <th>{files.file_date}</th>
@@ -308,7 +307,8 @@ const Bill_detail_page = ({ id }) => {
                                   <>
                                     {" "}
                                     <Button
-                                      color="danger" block
+                                      color="danger"
+                                      block
                                       onClick={() => alertdelect(files.id)}
                                     >
                                       ลบไฟล์
@@ -318,7 +318,8 @@ const Bill_detail_page = ({ id }) => {
                                   <>
                                     {" "}
                                     <Button
-                                      color="danger" block
+                                      color="danger"
+                                      block
                                       onClick={() => alertdelect(files.id)}
                                       disabled
                                     >
@@ -355,6 +356,7 @@ const Bill_detail_page = ({ id }) => {
                               <b>
                                 ข้อมูลการวางบิล หมายเลขบิล: {id} ชื่อร้าน{" "}
                                 {Bill.Store_name}
+                                <br></br>
                               </b>{" "}
                               {Bill.bill_op_time}
                             </h6>
@@ -369,17 +371,23 @@ const Bill_detail_page = ({ id }) => {
                           <div>
                             <Row>
                               <Col md="8">
-                                <b>ยอดวางบิล : {Bill.amount} บาท</b>
+                                <h5>
+                                  <b>ภาษี : {Bill.SumTax} บาท</b>
+                                  <br></br>
+                                  <b>ยอดวางบิล : {Bill.amount} บาท</b>
+                                  <br></br>
+                                  <b>วันครบกำหนด : {Bill.bill_duedate}</b>
+                                </h5>
                               </Col>
                               <Col md="4">
-                                {Bill.billstatus == "wait" ||
+                                {/* {Bill.billstatus == "wait" ||
                                 Bill.billstatus == "ไม่ผ่านการอนุมัติ" ? (
                                   <>
                                     <Edit_amount id={id} />
                                   </>
                                 ) : (
                                   <></>
-                                )}
+                                )} */}
                               </Col>
                             </Row>
                           </div>

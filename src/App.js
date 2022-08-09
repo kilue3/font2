@@ -10,7 +10,6 @@ import Store_Login from "./page/StoreUser/store_login";
 import MainStorepage from "./page/StoreUser/main_store";
 import Billlist from "./page/StoreUser/bill_list";
 import Billdetail from "./page/StoreUser/bill_detail.js";
-import Testfile from "../src/page/testfile";
 import Bill_detail_admin from "./page/admin/bill_detail_admin";
 import Billpasspage from "./page/admin/ิbillpass";
 import History_bill from "./page/StoreUser/history_bill";
@@ -44,7 +43,6 @@ const App = () => {
           <Route path="/mainstore" component={MainStorepage} />
           <Route path="/Billuser" component={Billlist} />
           <Route path="/Billdetailfrom/:id" component={Billdetail} />
-          <Route path="/test" component={Testfile} />
           <Route path="/Billdetailfromadmin/:id"  component={Bill_detail_admin} />
           <Route path="/Billpasspage" component={Billpasspage} />
           <Route path="/History_bill" component={History_bill} />

@@ -58,6 +58,7 @@ var minc = data.password.length;
         
                   Swal.fire(
                     "เปลี่ยนรหัสผ่านสำเร็จ",
+                    "เปลี่ยนรหัสผ่านสำเร็จแล้ว",
                     "success"
                   )
                   .then(() => window.location.reload());
@@ -84,7 +85,7 @@ var minc = data.password.length;
     }else{
         Swal.fire(
             "เปลี่ยนรหัสผ่านล้มเหลว",
-            "กรุณาตั้งรหัสผ่าน 8 หลัก",
+            "กรุณาตั้งรหัสผ่าน 8 ตัว",
             "warning"
           );
     }
@@ -96,7 +97,7 @@ var minc = data.password.length;
 
   return (
     <div style={{ marginTop: "0px", marginLeft: "10px" }}>
-      <Button className="Button-Style" color="warning" onClick={toggle}>
+      <Button className="Button-Style" color="warning"  onClick={toggle} >
         เปลี่ยนรหัสผ่าน
       </Button>
   

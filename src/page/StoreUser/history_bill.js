@@ -94,7 +94,6 @@ const History_bill = () => {
                       <th>วัน-เวลา</th>
                       <th>เลขที่บิล </th>
                       <th>จำนวนเงิน</th>
-                      <th>รายละเอียด</th>
                       <th>สถานะ</th>
                       <th>ดูรายละเอียด</th>
 
@@ -107,10 +106,9 @@ const History_bill = () => {
                         <>
                           <tr>
                             <td>{lists.bill_op_time}</td>
- <th>{lists.bill_id}</th>
+                               <th>{lists.bill_id}</th>
                             <th>{lists.bill_amount}</th>
 
-                            <td>{lists.bill_detail}</td>
                             {lists.bill_status =="wait" ? (<><td className="status">สร้างใหม่</td></>):(<>
                             
                               <td className="status">{lists.bill_status}</td></>)}

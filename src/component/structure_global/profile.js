@@ -164,7 +164,7 @@ const Profile = ({ id }) => {
                       <b>{userinfo.status}</b>
                     </div>
                   </Row>
-                  <div className="borderline" />
+                  {/* <div className="borderline" /> */}
                   <Form>
                     <div align="center">
                 
@@ -172,7 +172,7 @@ const Profile = ({ id }) => {
                           <Row>
                       
                             <Col >
-                                <Resetpass id={id}/>
+                                {/* <Resetpass id={id}/> */}
                              
                             </Col>
 

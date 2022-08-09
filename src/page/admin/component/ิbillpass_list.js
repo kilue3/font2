@@ -22,7 +22,6 @@ const Billlist = ({id}) => {
           <th>{lists.bill_id}</th>
           <th>{lists.bill_amount}</th>
 
-          <td>{lists.bill_detail}</td>
 
           {lists.bill_status == "wait" ? (
                               <>

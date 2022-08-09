@@ -1,8 +1,7 @@
 const Api = (props) => {
-  let path = "http://localhost/Mback/public/";
-  let uploads = "http://localhost/Mback/";
-
-  let store = "http://localhost/TEST/";
+  let path = "http://localhost/billing/public/";
+  let uploads = "http://localhost/billing/";///ใช้ระบบpath ไฟลที่อัพ
+  let store = "http://localhost/billing/Axapi/";
 
   switch (props) {
     // -------------------- Category -----------------------
@@ -10,12 +9,10 @@ const Api = (props) => {
       return path + "Login";
     case "Storelogin":
       return path + "Storelogin";
-
-    case "Showlistnameusers":
+   case "Showlistnameusers":
       return path + "allusers";
     case "Allnormaluser":
       return path + "allnormaluser";
-
     case "Info_user":
       return path + "infouser/";
     case "Delectuser":
@@ -96,23 +93,40 @@ const Api = (props) => {
     case "CheckStore":
       return path + "CheckStore/";
 
-      case "SearchNameStore":
-        return path + "searchNameStore/";
+    case "SearchNameStore":
+      return path + "searchNameStore/";
 
-        case "Billnotpasslist":
-          return path + "Billnotpasslist";
-          case "SearchIDbillnotpass":
-            return path + "searchIDbillnotpass/";
-          
+    case "Billnotpasslist":
+      return path + "Billnotpasslist";
+    case "SearchIDbillnotpass":
+      return path + "searchIDbillnotpass/";
 
+    ///////////////////////excel//////////////////////
+    case "Exportexcel":
+      return path + "export";
 
+      case "Import":
+        return path + "Import";
       
-      case "Getstore":
+
+    ///////////////////////////////////////////////
+
+
+
+
+    case "Getstore":
       return store + "";
     case "Getstoreinfo":
       return store + "getstore.php?ID=";
     case "SearchStore":
       return store + "search.php?ID=";
+    case "Getstoreinvoice":
+      return store + "invoice.php?ID=";
+    case "GetInvoicedt":
+      return store + "getInvoice.php?ID=";
+
+    case "Logins":
+      return store + "login.php";
 
     case "Uploadfolder":
       return uploads + "img/upload/";

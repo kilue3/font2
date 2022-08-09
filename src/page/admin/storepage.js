@@ -96,10 +96,7 @@ const Storepage = () => {
               <Card className="CardHeaderStyle">
                 <Col md="6"></Col>
                 <h5 style={{ margin: "0px" }}>
-                  <img
-                    className="header-1-Icon"
-                    src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png"
-                  />
+                
                   บัญชีร้านค้าในระบบทั้งหมด
                 </h5>
               </Card>
@@ -108,7 +105,7 @@ const Storepage = () => {
               <Card className="CardHeaderStyle">
                 <Col md="6"></Col>
                 <h5 style={{ margin: "0px" }}>
-                  ค้นหาผู้ใช้ในระบบ
+                  ค้นหาร้านค้าในระบบ
                   <hr></hr>
                   <Row>
                     <Col md="6">
@@ -135,13 +132,12 @@ const Storepage = () => {
             </Card>
             <Card className="CardBackground-1" style={{ margin: 10 }}>
               <CardBody>
-                {ses.status == "admin" ? <Registerstore /> : ""}
+                {ses.status == "admin"|| ses.status == "normal" ? <Registerstore /> : ""}
                 <Table bordered responsive hover>
                   <thead>
                     <tr>
-                      <th>ID</th>
                       <th>ชื่อร้านค้า </th>
-                      <th>Username</th>
+                      <th>ชื่อผู้ใช้	</th>
                       {ses.status == "admin" || ses.status == "normal" ? (
                         <th>รายละเอียดร้านค้า</th>
                       ) : (
@@ -164,9 +160,8 @@ const Storepage = () => {
                           return (
                             <>
                               <tr>
-                                <th>{lists.Store_id}</th>
-
-                                <td>{lists.Store_name}</td>
+                           
+                                <td key={lists.Store_id}>{lists.Store_name}</td>
                                 <td>{lists.Store_username}</td>
                                 <td>
                                   {" "}
